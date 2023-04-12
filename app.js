@@ -16,13 +16,10 @@ dotenv.config();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/prompt', require('./routes/promptRouter'));
-app.set('view engine', 'ejs');
 
 // MongoDB
 const { MongoClient } = require('mongodb');
-const client = new MongoClient(
-  'mongodb+srv://prompty:supersite2020@prompty.stsoa6d.mongodb.net/?retryWrites=true&w=majority'
-);
+const client = new MongoClient(process.env.MONGODB_URL);
 client.connect();
 
 // DB
@@ -33,10 +30,6 @@ app.use('/', require('./routes/promptRouter'));
 
 app.listen(8080, function () {
   console.log('listening on 8080');
-});
-
-app.get('/list', (request, response) => {
-  response.render('list.ejs');
 });
 
 app.get('/get/:id', async (request, response) => {
