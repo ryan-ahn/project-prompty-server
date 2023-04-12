@@ -20,7 +20,9 @@ app.set('view engine', 'ejs');
 
 // MongoDB
 const { MongoClient } = require('mongodb');
-const client = new MongoClient(process.env.MONGODB_URL);
+const client = new MongoClient(
+  'mongodb+srv://prompty:supersite2020@prompty.stsoa6d.mongodb.net/?retryWrites=true&w=majority'
+);
 client.connect();
 
 // DB
