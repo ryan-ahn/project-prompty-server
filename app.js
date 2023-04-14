@@ -28,7 +28,7 @@ const promptList = db.collection('list');
 
 app.use('/', require('./routes/promptRouter'));
 
-app.listen(8080, function () {
+app.listen(3000, function () {
   response.send('완료');
 });
 
