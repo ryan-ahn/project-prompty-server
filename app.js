@@ -28,8 +28,12 @@ const promptList = db.collection('list');
 
 app.use('/', require('./routes/promptRouter'));
 
-app.listen(8080, function () {
-  console.log('listening on 8080');
+app.listen(5000, function () {
+  response.send('완료');
+});
+
+app.get('/', function () {
+  response.send('완료');
 });
 
 app.get('/get/:id', async (request, response) => {
