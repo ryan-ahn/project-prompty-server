@@ -6,20 +6,15 @@
 
 import dotenv from 'dotenv';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 const envFound = dotenv.config();
 if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 
 export default {
-  port:
-    process.env.NODE_ENV === 'development'
-      ? (parseInt(process.env.CLIENT_PORT as string, 10) as number)
-      : (parseInt(process.env.SERVER_PORT as string, 10) as number),
+  port: process.env.PORT,
   mongoURI:
-    process.env.NODE_ENV === 'development'
-      ? (process.env.MONGODB_LOCAL_URL as string)
-      : (process.env.MONGODB_PROD_URL as string),
+    process.env.NODE_ENV === 'production'
+      ? (process.env.MONGODB_PROD_URL as string)
+      : (process.env.MONGODB_DEV_URL as string),
 };

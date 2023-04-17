@@ -17,9 +17,9 @@ connectDB();
 // Cors
 const corsOptions = {
   origin:
-    process.env.NODE_ENV === 'development'
-      ? process.env.LOCAL_HOST
-      : process.env.PROD_HOST,
+    process.env.NODE_ENV === 'production'
+      ? process.env.PROD_ORIGIN
+      : process.env.DEV_ORIGIN,
   credentials: true,
 };
 
@@ -41,3 +41,6 @@ app
     console.error(err);
     process.exit(1);
   });
+app.get('/', (req, res) => {
+  res.send('server clear');
+});
