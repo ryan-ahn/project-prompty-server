@@ -14,7 +14,6 @@ const createPromptController = async (
   res: Response
 ): Promise<void> => {
   const postCreateDto: IPromptCreateDto = req.body;
-
   try {
     const data = await promptServices.createPromptService(postCreateDto);
     res

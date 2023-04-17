@@ -18,7 +18,9 @@ require('dotenv').config();
 (0, db_1.default)();
 // Cors
 const corsOptions = {
-    origin: 'https://www.prompty.im',
+    origin: process.env.NODE_ENV === 'production'
+        ? process.env.PROD_ORIGIN
+        : process.env.DEV_ORIGIN,
     credentials: true,
 };
 // Use Express

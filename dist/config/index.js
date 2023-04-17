@@ -15,5 +15,7 @@ if (envFound.error) {
 }
 exports.default = {
     port: process.env.PORT,
-    mongoURI: process.env.MONGODB_URL,
+    mongoURI: process.env.NODE_ENV === 'production'
+        ? process.env.MONGODB_PROD_URL
+        : process.env.MONGODB_DEV_URL,
 };
