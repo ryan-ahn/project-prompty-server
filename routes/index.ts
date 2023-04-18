@@ -11,7 +11,7 @@ import gptRoutes from './gptRoutes';
 
 const router: Router = Router();
 
-router.use('/prompt', promptRoutes);
-router.use('/gpt', gptRoutes);
+router.use('/v1/prompt', promptRoutes);
+router.use('/v1/gpt', gptRoutes);
 
 export default router;

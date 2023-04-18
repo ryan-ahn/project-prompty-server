@@ -1,8 +1,8 @@
 "use strict";
 /**
  * Author : Ryan
- * Date : 2023-04-16
- * Desc : prompt
+ * Date : 2023-04-18
+ * Desc : gptControllers
  */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -16,13 +16,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const modules_1 = require("../modules");
-const createPromptController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const createPromptDto = req.body;
+const sendGptController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const sendGpt = req.body;
     try {
-        const data = yield services_1.promptServices.createPromptService(createPromptDto);
+        const data = yield services_1.gptServices.sendGptService(sendGpt);
         res
             .status(modules_1.statusCode.CREATED)
-            .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.CREATE_SUCCESS, data));
+            .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.SUCCESS, data));
     }
     catch (error) {
         console.log(error);
@@ -31,20 +31,6 @@ const createPromptController = (req, res) => __awaiter(void 0, void 0, void 0, f
             .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
     }
 });
-const readPromptByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
-    try {
-        const data = yield services_1.promptServices.readPromptByIdService(id);
-        res.status(modules_1.statusCode.CREATED);
-        res.send(modules_1.util.success(modules_1.statusCode.OK, modules_1.responseMessage.READ_SUCCESS, data));
-    }
-    catch (error) {
-        res
-            .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
-            .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
-    }
-});
 exports.default = {
-    createPromptController,
-    readPromptByIdController,
+    sendGptController,
 };
