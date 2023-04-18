@@ -13,7 +13,7 @@ const sendGptController = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const sendGpt: any = req.body;
+  const sendGpt: ISendGptReq = req.body;
   try {
     const data = await gptServices.sendGptService(sendGpt);
     res

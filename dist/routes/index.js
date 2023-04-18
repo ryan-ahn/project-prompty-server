@@ -13,6 +13,6 @@ const express_1 = require("express");
 const promptRoutes_1 = __importDefault(require("./promptRoutes"));
 const gptRoutes_1 = __importDefault(require("./gptRoutes"));
 const router = (0, express_1.Router)();
-router.use('/prompt', promptRoutes_1.default);
-router.use('/gpt', gptRoutes_1.default);
+router.use('/v1/prompt', promptRoutes_1.default);
+router.use('/v1/gpt', gptRoutes_1.default);
 exports.default = router;
