@@ -5,5 +5,6 @@
  */
 
 import promptServices from './promptServices';
+import gptServices from './gptServices';
 
-export { promptServices };
+export { promptServices, gptServices };

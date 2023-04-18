@@ -5,25 +5,21 @@
  */
 
 import { Request, Response } from 'express';
-import { responseMessage, statusCode, util } from '../modules';
 import { promptServices } from '../services';
+import { responseMessage, statusCode, util } from '../modules';
 import { IPromptCreateDto } from '../interfaces/promptInterfaces';
 
 const createPromptController = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const postCreateDto: IPromptCreateDto = req.body;
+  const createPromptDto: IPromptCreateDto = req.body;
   try {
-    const data = await promptServices.createPromptService(postCreateDto);
+    const data = await promptServices.createPromptService(createPromptDto);
     res
       .status(statusCode.CREATED)
       .send(
-        util.success(
-          statusCode.CREATED,
-          responseMessage.CREATE_POST_SUCCESS,
-          data
-        )
+        util.success(statusCode.CREATED, responseMessage.CREATE_SUCCESS, data)
       );
   } catch (error) {
     console.log(error);
@@ -46,9 +42,7 @@ const readPromptByIdController = async (
   try {
     const data = await promptServices.readPromptByIdService(id);
     res.status(statusCode.CREATED);
-    res.send(
-      util.success(statusCode.OK, responseMessage.READ_POST_SUCCESS, data)
-    );
+    res.send(util.success(statusCode.OK, responseMessage.READ_SUCCESS, data));
   } catch (error) {
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)

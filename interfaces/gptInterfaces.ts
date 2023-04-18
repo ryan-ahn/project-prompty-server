@@ -4,8 +4,17 @@
  * Desc : gptInterfaces
  */
 
-import mongoose from 'mongoose';
+export interface IMessageRole {
+  role: string;
+  content: string;
+}
 
-export interface IGptReq {}
+export interface ISendGptReq {
+  assistant: Array<{ prompt: string; answer: string }>;
+  input: string;
+}
 
-export interface IGptRes {}
+export interface ISendGptRes {
+  prompt: string;
+  answer: string;
+}

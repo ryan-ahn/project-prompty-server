@@ -9,8 +9,8 @@ import { promptControllers } from '../controllers';
 
 const router: Router = Router();
 
-router.post('/prompt/', promptControllers.createPromptController);
-router.get('/prompt/:id', promptControllers.readPromptByIdController);
+router.post('/', promptControllers.createPromptController);
+router.get('/:id', promptControllers.readPromptByIdController);
 
 module.exports = router;
 

@@ -5,5 +5,6 @@
  */
 
 import promptControllers from './promptControllers';
+import gptControllers from './gptControllers';
 
-export { promptControllers };
+export { promptControllers, gptControllers };

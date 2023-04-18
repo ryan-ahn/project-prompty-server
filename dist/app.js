@@ -18,9 +18,9 @@ require('dotenv').config();
 (0, db_1.default)();
 // Cors
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'production'
-        ? process.env.PROD_ORIGIN
-        : process.env.DEV_ORIGIN,
+    origin: process.env.NODE_ENV === 'development'
+        ? process.env.DEV_ORIGIN
+        : process.env.PROD_ORIGIN,
     credentials: true,
 };
 // Use Express
@@ -41,6 +41,6 @@ app
     console.error(err);
     process.exit(1);
 });
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
     res.send('server clear');
 });

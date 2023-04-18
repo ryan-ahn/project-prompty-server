@@ -7,9 +7,11 @@
 //router index file
 import { Router } from 'express';
 import promptRoutes from './promptRoutes';
+import gptRoutes from './gptRoutes';
 
 const router: Router = Router();
 
-router.use('/api', promptRoutes);
+router.use('/prompt', promptRoutes);
+router.use('/gpt', gptRoutes);
 
 export default router;
