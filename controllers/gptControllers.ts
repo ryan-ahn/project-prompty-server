@@ -7,15 +7,41 @@
 import { Request, Response } from 'express';
 import { gptServices } from '../services';
 import { responseMessage, statusCode, util } from '../modules';
-import { ISendGptReq } from '../interfaces/gptInterfaces';
+import {
+  ISendGptChainReq,
+  ISendGptRelationReq,
+} from '../interfaces/gptInterfaces';
 
-const sendGptController = async (
+const sendGptChainController = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const sendGpt: ISendGptReq = req.body;
+  const payload: ISendGptChainReq = req.body;
   try {
-    const data = await gptServices.sendGptService(sendGpt);
+    const data = await gptServices.sendGptChainService(payload);
+    res
+      .status(statusCode.CREATED)
+      .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .send(
+        util.fail(
+          statusCode.INTERNAL_SERVER_ERROR,
+          responseMessage.INTERNAL_SERVER_ERROR
+        )
+      );
+  }
+};
+
+const sendGptRelationController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const payload: ISendGptRelationReq = req.body;
+  try {
+    const data = await gptServices.sendGptRelationService(payload);
     res
       .status(statusCode.CREATED)
       .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
@@ -33,5 +59,6 @@ const sendGptController = async (
 };
 
 export default {
-  sendGptController,
+  sendGptChainController,
+  sendGptRelationController,
 };

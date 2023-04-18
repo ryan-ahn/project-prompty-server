@@ -9,12 +9,21 @@ export interface IMessageRole {
   content: string;
 }
 
-export interface ISendGptReq {
+export interface ISendGptChainReq {
   assistant: Array<{ prompt: string; answer: string }>;
   input: string;
 }
 
-export interface ISendGptRes {
+export interface ISendGptChainRes {
   prompt: string;
   answer: string;
+}
+
+export interface ISendGptRelationReq {
+  assistant: Array<{ prompt: string; answer: string }>;
+  input: string;
+}
+
+export interface ISendGptRelationRes {
+  result: string;
 }

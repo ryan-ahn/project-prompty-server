@@ -17,9 +17,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const modules_1 = require("../modules");
 const createPromptController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const createPromptDto = req.body;
+    const payload = req.body;
     try {
-        const data = yield services_1.promptServices.createPromptService(createPromptDto);
+        const data = yield services_1.promptServices.createPromptService(payload);
         res
             .status(modules_1.statusCode.CREATED)
             .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.CREATE_SUCCESS, data));

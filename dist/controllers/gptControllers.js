@@ -16,10 +16,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const services_1 = require("../services");
 const modules_1 = require("../modules");
-const sendGptController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const sendGpt = req.body;
+const sendGptChainController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const payload = req.body;
     try {
-        const data = yield services_1.gptServices.sendGptService(sendGpt);
+        const data = yield services_1.gptServices.sendGptChainService(payload);
+        res
+            .status(modules_1.statusCode.CREATED)
+            .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.SUCCESS, data));
+    }
+    catch (error) {
+        console.log(error);
+        res
+            .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
+            .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
+    }
+});
+const sendGptRelationController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const payload = req.body;
+    try {
+        const data = yield services_1.gptServices.sendGptRelationService(payload);
         res
             .status(modules_1.statusCode.CREATED)
             .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.SUCCESS, data));
@@ -32,5 +47,6 @@ const sendGptController = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.default = {
-    sendGptController,
+    sendGptChainController,
+    sendGptRelationController,
 };

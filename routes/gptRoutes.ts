@@ -9,8 +9,8 @@ import { gptControllers } from '../controllers';
 
 const router: Router = Router();
 
-router.post('/chain', gptControllers.sendGptController);
-router.get('/relation', gptControllers.sendGptController);
+router.post('/chain', gptControllers.sendGptChainController);
+router.post('/relation', gptControllers.sendGptRelationController);
 
 module.exports = router;
 

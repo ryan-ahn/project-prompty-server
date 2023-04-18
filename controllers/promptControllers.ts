@@ -13,9 +13,9 @@ const createPromptController = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const createPromptDto: IPromptCreateDto = req.body;
+  const payload: IPromptCreateDto = req.body;
   try {
-    const data = await promptServices.createPromptService(createPromptDto);
+    const data = await promptServices.createPromptService(payload);
     res
       .status(statusCode.CREATED)
       .send(
