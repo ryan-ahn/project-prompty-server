@@ -23,7 +23,6 @@ const sendGptChainController = async (
       .status(statusCode.CREATED)
       .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .send(
@@ -46,7 +45,6 @@ const sendGptRelationController = async (
       .status(statusCode.CREATED)
       .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .send(

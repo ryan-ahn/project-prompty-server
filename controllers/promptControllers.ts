@@ -44,6 +44,7 @@ const readPromptByIdController = async (
     res.status(statusCode.CREATED);
     res.send(util.success(statusCode.OK, responseMessage.READ_SUCCESS, data));
   } catch (error) {
+    console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .send(

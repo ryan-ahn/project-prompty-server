@@ -25,7 +25,7 @@ const sendGptChainController = (req, res) => __awaiter(void 0, void 0, void 0, f
             .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.SUCCESS, data));
     }
     catch (error) {
-        console.log(error);
+        console.log('gptChainError : ' + error);
         res
             .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
             .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
@@ -40,7 +40,7 @@ const sendGptRelationController = (req, res) => __awaiter(void 0, void 0, void 0
             .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.SUCCESS, data));
     }
     catch (error) {
-        console.log(error);
+        console.log('gptRelationError : ' + error);
         res
             .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
             .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));

@@ -12,6 +12,7 @@ import {
   ISendGptRelationReq,
   ISendGptRelationRes,
 } from '../interfaces/gptInterfaces';
+import { SystemError } from '../interfaces/system';
 
 const sendGptChainService = async (
   payload: ISendGptChainReq
@@ -35,24 +36,30 @@ const sendGptChainService = async (
     role: 'user',
     content: `${payload.input}`,
   });
-  const response = await axios.post(
-    `https://api.openai.com/v1/chat/completions`,
-    {
-      model: 'gpt-3.5-turbo',
-      messages: messages,
-      temperature: 0.7,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+  try {
+    const response = await axios.post(
+      `https://api.openai.com/v1/chat/completions`,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: messages,
+        temperature: 0.7,
       },
-    }
-  );
-  const data: ISendGptChainRes = {
-    prompt: payload.input,
-    answer: response.data.choices[0].message.content,
-  };
-  return data;
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+        },
+      }
+    );
+    const data: ISendGptChainRes = {
+      prompt: payload.input,
+      answer: response.data.choices[0].message.content,
+    };
+    return data;
+  } catch (error) {
+    const typeError = error as SystemError;
+    console.log(typeError.response.data);
+    throw error;
+  }
 };
 
 const sendGptRelationService = async (
@@ -77,21 +84,28 @@ const sendGptRelationService = async (
     role: 'user',
     content: `"${payload.input}"라는 질문 또는 요청과 관련 있는 주제 세 가지를 보여주세요. 질문 형태로 말해주시고 다른 말은 하지 말아주세요. 각각의 질문은 개행문자로 줄바꿈 처리 해주세요.`,
   });
-  const response = await axios.post(
-    `https://api.openai.com/v1/chat/completions`,
-    {
-      model: 'gpt-3.5-turbo',
-      messages: messages,
-      temperature: 0.1,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+  try {
+    const response = await axios.post(
+      `https://api.openai.com/v1/chat/completions`,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: messages,
+        temperature: 0.1,
       },
-    }
-  );
-  const result: ISendGptRelationRes = response.data.choices[0].message.content;
-  return result;
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+        },
+      }
+    );
+    const result: ISendGptRelationRes =
+      response.data.choices[0].message.content;
+    return result;
+  } catch (error) {
+    const typeError = error as SystemError;
+    console.log(typeError.response.data);
+    throw error;
+  }
 };
 
 export default {

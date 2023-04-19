@@ -39,6 +39,7 @@ const readPromptByIdController = (req, res) => __awaiter(void 0, void 0, void 0,
         res.send(modules_1.util.success(modules_1.statusCode.OK, modules_1.responseMessage.READ_SUCCESS, data));
     }
     catch (error) {
+        console.log(error);
         res
             .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
             .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));

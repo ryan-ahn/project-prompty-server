@@ -38,20 +38,27 @@ const sendGptChainService = (payload) => __awaiter(void 0, void 0, void 0, funct
         role: 'user',
         content: `${payload.input}`,
     });
-    const response = yield axios_1.default.post(`https://api.openai.com/v1/chat/completions`, {
-        model: 'gpt-3.5-turbo',
-        messages: messages,
-        temperature: 0.7,
-    }, {
-        headers: {
-            Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
-        },
-    });
-    const data = {
-        prompt: payload.input,
-        answer: response.data.choices[0].message.content,
-    };
-    return data;
+    try {
+        const response = yield axios_1.default.post(`https://api.openai.com/v1/chat/completions`, {
+            model: 'gpt-3.5-turbo',
+            messages: messages,
+            temperature: 0.7,
+        }, {
+            headers: {
+                Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+            },
+        });
+        const data = {
+            prompt: payload.input,
+            answer: response.data.choices[0].message.content,
+        };
+        return data;
+    }
+    catch (error) {
+        const typeError = error;
+        console.log(typeError.response.data);
+        throw error;
+    }
 });
 const sendGptRelationService = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const messages = [
@@ -73,17 +80,24 @@ const sendGptRelationService = (payload) => __awaiter(void 0, void 0, void 0, fu
         role: 'user',
         content: `"${payload.input}"라는 질문 또는 요청과 관련 있는 주제 세 가지를 보여주세요. 질문 형태로 말해주시고 다른 말은 하지 말아주세요. 각각의 질문은 개행문자로 줄바꿈 처리 해주세요.`,
     });
-    const response = yield axios_1.default.post(`https://api.openai.com/v1/chat/completions`, {
-        model: 'gpt-3.5-turbo',
-        messages: messages,
-        temperature: 0.1,
-    }, {
-        headers: {
-            Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
-        },
-    });
-    const result = response.data.choices[0].message.content;
-    return result;
+    try {
+        const response = yield axios_1.default.post(`https://api.openai.com/v1/chat/completions`, {
+            model: 'gpt-3.5-turbo',
+            messages: messages,
+            temperature: 0.1,
+        }, {
+            headers: {
+                Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+            },
+        });
+        const result = response.data.choices[0].message.content;
+        return result;
+    }
+    catch (error) {
+        const typeError = error;
+        console.log(typeError.response.data);
+        throw error;
+    }
 });
 exports.default = {
     sendGptChainService,
