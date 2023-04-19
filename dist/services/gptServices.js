@@ -114,7 +114,7 @@ const sendGptRecommendService = () => __awaiter(void 0, void 0, void 0, function
         const response = yield axios_1.default.post(`https://api.openai.com/v1/chat/completions`, {
             model: 'gpt-3.5-turbo',
             messages: messages,
-            temperature: 0.1,
+            temperature: 0.5,
         }, {
             headers: {
                 Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,

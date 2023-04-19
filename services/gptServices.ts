@@ -42,7 +42,7 @@ const sendGptChainService = async (
       {
         model: 'gpt-3.5-turbo',
         messages: messages,
-        temperature: 0.7,
+        temperature: 0.3,
       },
       {
         headers: {
@@ -90,7 +90,7 @@ const sendGptRelationService = async (
       {
         model: 'gpt-3.5-turbo',
         messages: messages,
-        temperature: 0.1,
+        temperature: 0.3,
       },
       {
         headers: {
@@ -125,7 +125,7 @@ const sendGptRecommendService = async (): Promise<ISendGptRelationRes> => {
       {
         model: 'gpt-3.5-turbo',
         messages: messages,
-        temperature: 0.5,
+        temperature: 0.3,
       },
       {
         headers: {
