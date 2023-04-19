@@ -56,7 +56,10 @@ const sendGptRelationController = async (
   }
 };
 
-const sendGptRecommendController = async (res: Response): Promise<void> => {
+const sendGptRecommendController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const data = await gptServices.sendGptRecommendService();
     res
