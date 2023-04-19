@@ -44,7 +44,7 @@ const sendGptRelationController = (req, res) => __awaiter(void 0, void 0, void 0
             .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
     }
 });
-const sendGptRecommendController = (res) => __awaiter(void 0, void 0, void 0, function* () {
+const sendGptRecommendController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield services_1.gptServices.sendGptRecommendService();
         res
