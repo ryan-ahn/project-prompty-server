@@ -56,7 +56,26 @@ const sendGptRelationController = async (
   }
 };
 
+const sendGptRecommendController = async (res: Response): Promise<void> => {
+  try {
+    const data = await gptServices.sendGptRecommendService();
+    res
+      .status(statusCode.CREATED)
+      .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+  } catch (error) {
+    res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .send(
+        util.fail(
+          statusCode.INTERNAL_SERVER_ERROR,
+          responseMessage.INTERNAL_SERVER_ERROR
+        )
+      );
+  }
+};
+
 export default {
   sendGptChainController,
   sendGptRelationController,
+  sendGptRecommendController,
 };

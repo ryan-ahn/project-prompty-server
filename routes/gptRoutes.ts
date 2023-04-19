@@ -9,6 +9,7 @@ import { gptControllers } from '../controllers';
 
 const router: Router = Router();
 
+router.get('/recommend', gptControllers.sendGptRecommendController);
 router.post('/chain', gptControllers.sendGptChainController);
 router.post('/relation', gptControllers.sendGptRelationController);
 
