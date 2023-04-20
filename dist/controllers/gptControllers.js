@@ -45,8 +45,9 @@ const sendGptRelationController = (req, res) => __awaiter(void 0, void 0, void 0
     }
 });
 const sendGptRecommendController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const payload = req.body;
     try {
-        const data = yield services_1.gptServices.sendGptRecommendService();
+        const data = yield services_1.gptServices.sendGptRecommendService(payload);
         res
             .status(modules_1.statusCode.CREATED)
             .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.SUCCESS, data));

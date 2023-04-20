@@ -9,10 +9,49 @@ import {
   IMessageRole,
   ISendGptChainReq,
   ISendGptChainRes,
+  ISendGptRecommendReq,
+  ISendGptRecommendRes,
   ISendGptRelationReq,
   ISendGptRelationRes,
 } from '../interfaces/gptInterfaces';
 import { SystemError } from '../interfaces/system';
+
+const sendGptRecommendService = async (
+  payload: ISendGptRecommendReq
+): Promise<ISendGptRelationRes> => {
+  const messages: Array<IMessageRole> = [
+    {
+      role: 'system',
+      content: '당신은 내 질문에 답변해주는 도우미입니다.',
+    },
+    {
+      role: 'user',
+      content: `친구에게 지식과 관련된 질문을 해보려고 해요. ${payload.input}와 관련 있는 질문 세가지만 알려주세요. 질문 이외에 다른 말은 하지 말아주세요. 각각의 질문은 개행문자로 줄바꿈 처리 해주세요`,
+    },
+  ];
+  try {
+    const response = await axios.post(
+      `https://api.openai.com/v1/chat/completions`,
+      {
+        model: 'gpt-3.5-turbo',
+        messages: messages,
+        temperature: 0.3,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
+        },
+      }
+    );
+    const result: ISendGptRecommendRes =
+      response.data.choices[0].message.content;
+    return result;
+  } catch (error) {
+    const typeError = error as SystemError;
+    console.log(typeError.response.data);
+    throw error;
+  }
+};
 
 const sendGptChainService = async (
   payload: ISendGptChainReq
@@ -108,43 +147,8 @@ const sendGptRelationService = async (
   }
 };
 
-const sendGptRecommendService = async (): Promise<ISendGptRelationRes> => {
-  const messages: Array<IMessageRole> = [
-    {
-      role: 'system',
-      content: '당신은 내 질문에 답변해주는 도우미입니다.',
-    },
-    {
-      role: 'user',
-      content: `친구에게 신박한 질문을 해보려고 해요. 신박한 질문 세가지만 알려주세요. 질문 이외에 다른 말은 하지 말아주세요. 각각의 질문은 개행문자로 줄바꿈 처리 해주세요`,
-    },
-  ];
-  try {
-    const response = await axios.post(
-      `https://api.openai.com/v1/chat/completions`,
-      {
-        model: 'gpt-3.5-turbo',
-        messages: messages,
-        temperature: 0.3,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.GPT_SECRET_KEY}`,
-        },
-      }
-    );
-    const result: ISendGptRelationRes =
-      response.data.choices[0].message.content;
-    return result;
-  } catch (error) {
-    const typeError = error as SystemError;
-    console.log(typeError.response.data);
-    throw error;
-  }
-};
-
 export default {
+  sendGptRecommendService,
   sendGptChainService,
   sendGptRelationService,
-  sendGptRecommendService,
 };

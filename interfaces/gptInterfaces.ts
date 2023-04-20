@@ -27,3 +27,11 @@ export interface ISendGptRelationReq {
 export interface ISendGptRelationRes {
   result: string;
 }
+
+export interface ISendGptRecommendReq {
+  input: string;
+}
+
+export interface ISendGptRecommendRes {
+  result: string;
+}

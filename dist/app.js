@@ -33,7 +33,7 @@ app
     .listen(config_1.default.port, () => {
     console.log(`
     ################################################
-          🛡️  Server listening on ${process.env.NODE_ENV} 🛡️
+            🛡️  Server listening on ${process.env.PORT} 🛡️
     ################################################
   `);
 })

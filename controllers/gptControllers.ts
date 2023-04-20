@@ -60,8 +60,9 @@ const sendGptRecommendController = async (
   req: Request,
   res: Response
 ): Promise<void> => {
+  const payload: ISendGptRelationReq = req.body;
   try {
-    const data = await gptServices.sendGptRecommendService();
+    const data = await gptServices.sendGptRecommendService(payload);
     res
       .status(statusCode.CREATED)
       .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
