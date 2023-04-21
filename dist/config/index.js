@@ -18,4 +18,7 @@ exports.default = {
     mongoURI: process.env.NODE_ENV === 'development'
         ? process.env.MONGODB_DEV_URL
         : process.env.MONGODB_PROD_URL,
+    nodeWhiteList: process.env.NODE_ENV === 'development'
+        ? [process.env.DEV_ROOT_ORIGIN]
+        : [process.env.PROD_WWW_ORIGIN, process.env.PROD_ROOT_ORIGIN],
 };

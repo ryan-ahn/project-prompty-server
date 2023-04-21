@@ -8,18 +8,22 @@ import express from 'express';
 import config from './config';
 import connectDB from './loaders/db';
 import routes from './routes';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 require('dotenv').config();
 
 // Connect MongoDB
 connectDB();
 
 // Cors
-const corsOptions = {
-  origin:
-    process.env.NODE_ENV === 'development'
-      ? process.env.DEV_ORIGIN
-      : process.env.PROD_ORIGIN,
+const corsOptions: CorsOptions = {
+  origin: (origin: string | undefined, callback: any) => {
+    console.log(process.env.NODE_ENV, config.nodeWhiteList, origin);
+    if (config.nodeWhiteList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not Allowed Origin!'));
+    }
+  },
   credentials: true,
 };
 

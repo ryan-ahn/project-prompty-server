@@ -35,7 +35,7 @@ const sendGptRecommendService = async (
       {
         model: 'gpt-3.5-turbo',
         messages: messages,
-        temperature: 0.3,
+        temperature: 0.5,
       },
       {
         headers: {

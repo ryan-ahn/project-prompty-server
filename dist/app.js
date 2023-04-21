@@ -18,9 +18,15 @@ require('dotenv').config();
 (0, db_1.default)();
 // Cors
 const corsOptions = {
-    origin: process.env.NODE_ENV === 'development'
-        ? process.env.DEV_ORIGIN
-        : process.env.PROD_ORIGIN,
+    origin: (origin, callback) => {
+        console.log(process.env.NODE_ENV, config_1.default.nodeWhiteList, origin);
+        if (config_1.default.nodeWhiteList.indexOf(origin) !== -1) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not Allowed Origin!'));
+        }
+    },
     credentials: true,
 };
 // Use Express
