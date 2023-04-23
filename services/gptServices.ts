@@ -73,7 +73,7 @@ const sendGptChainService = async (
   }
   messages.push({
     role: 'user',
-    content: `${payload.input}`,
+    content: `${payload.input}. 에 대해 답변해주세요. 답변 외에 다른말은 하지 말아주세요. 답변에서 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주세요. `,
   });
   try {
     const response = await axios.post(
@@ -81,7 +81,7 @@ const sendGptChainService = async (
       {
         model: 'gpt-3.5-turbo',
         messages: messages,
-        temperature: 0.3,
+        temperature: 0.5,
       },
       {
         headers: {
@@ -121,7 +121,7 @@ const sendGptRelationService = async (
   }
   messages.push({
     role: 'user',
-    content: `해당 내용에 관련된 추가 질문을 하려고 해요. "${payload.input}"라는 질문 또는 요청과 관련 있는 주제 세 가지를 보여주세요. 질문 형태로 말해주시고 다른 말은 하지 말아주세요. 각각의 질문은 개행문자로 줄바꿈 처리 해주세요.`,
+    content: `해당 내용에 관련된 추가 질문을 하려고 해요. "${payload.input}"라는 질문 또는 요청과 관련 있는 주제 세 가지를 보여주세요. 질문 형태로 말해주시고 다른 말과 추가 대답은 하지 말아주세요. 각각의 질문은 개행문자로 줄바꿈 처리 해주세요.`,
   });
   try {
     const response = await axios.post(

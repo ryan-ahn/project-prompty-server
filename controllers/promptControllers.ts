@@ -18,14 +18,14 @@ const createPromptController = async (
     const data = await promptServices.createPromptService(payload);
     res
       .status(statusCode.CREATED)
-      .send(
+      .json(
         util.success(statusCode.CREATED, responseMessage.CREATE_SUCCESS, data)
       );
   } catch (error) {
     console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(
+      .json(
         util.fail(
           statusCode.INTERNAL_SERVER_ERROR,
           responseMessage.INTERNAL_SERVER_ERROR
@@ -42,12 +42,12 @@ const readPromptByIdController = async (
   try {
     const data = await promptServices.readPromptByIdService(id);
     res.status(statusCode.CREATED);
-    res.send(util.success(statusCode.OK, responseMessage.READ_SUCCESS, data));
+    res.json(util.success(statusCode.OK, responseMessage.READ_SUCCESS, data));
   } catch (error) {
     console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(
+      .json(
         util.fail(
           statusCode.INTERNAL_SERVER_ERROR,
           responseMessage.INTERNAL_SERVER_ERROR

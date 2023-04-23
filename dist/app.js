@@ -19,7 +19,6 @@ require('dotenv').config();
 // Cors
 const corsOptions = {
     origin: (origin, callback) => {
-        console.log(process.env.NODE_ENV, config_1.default.nodeWhiteList, origin);
         if (config_1.default.nodeWhiteList.indexOf(origin) !== -1) {
             callback(null, true);
         }

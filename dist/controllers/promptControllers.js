@@ -22,13 +22,13 @@ const createPromptController = (req, res) => __awaiter(void 0, void 0, void 0, f
         const data = yield services_1.promptServices.createPromptService(payload);
         res
             .status(modules_1.statusCode.CREATED)
-            .send(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.CREATE_SUCCESS, data));
+            .json(modules_1.util.success(modules_1.statusCode.CREATED, modules_1.responseMessage.CREATE_SUCCESS, data));
     }
     catch (error) {
         console.log(error);
         res
             .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
-            .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
+            .json(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
     }
 });
 const readPromptByIdController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -36,13 +36,13 @@ const readPromptByIdController = (req, res) => __awaiter(void 0, void 0, void 0,
     try {
         const data = yield services_1.promptServices.readPromptByIdService(id);
         res.status(modules_1.statusCode.CREATED);
-        res.send(modules_1.util.success(modules_1.statusCode.OK, modules_1.responseMessage.READ_SUCCESS, data));
+        res.json(modules_1.util.success(modules_1.statusCode.OK, modules_1.responseMessage.READ_SUCCESS, data));
     }
     catch (error) {
         console.log(error);
         res
             .status(modules_1.statusCode.INTERNAL_SERVER_ERROR)
-            .send(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
+            .json(modules_1.util.fail(modules_1.statusCode.INTERNAL_SERVER_ERROR, modules_1.responseMessage.INTERNAL_SERVER_ERROR));
     }
 });
 exports.default = {

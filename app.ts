@@ -17,7 +17,6 @@ connectDB();
 // Cors
 const corsOptions: CorsOptions = {
   origin: (origin: string | undefined, callback: any) => {
-    console.log(process.env.NODE_ENV, config.nodeWhiteList, origin);
     if (config.nodeWhiteList.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
