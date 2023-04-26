@@ -21,11 +21,11 @@ const sendGptChainController = async (
     const data = await gptServices.sendGptChainService(payload);
     res
       .status(statusCode.CREATED)
-      .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+      .json(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(
+      .json(
         util.fail(
           statusCode.INTERNAL_SERVER_ERROR,
           responseMessage.INTERNAL_SERVER_ERROR
@@ -43,11 +43,11 @@ const sendGptRelationController = async (
     const data = await gptServices.sendGptRelationService(payload);
     res
       .status(statusCode.CREATED)
-      .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+      .json(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(
+      .json(
         util.fail(
           statusCode.INTERNAL_SERVER_ERROR,
           responseMessage.INTERNAL_SERVER_ERROR
@@ -65,11 +65,11 @@ const sendGptRecommendController = async (
     const data = await gptServices.sendGptRecommendService(payload);
     res
       .status(statusCode.CREATED)
-      .send(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+      .json(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
-      .send(
+      .json(
         util.fail(
           statusCode.INTERNAL_SERVER_ERROR,
           responseMessage.INTERNAL_SERVER_ERROR
