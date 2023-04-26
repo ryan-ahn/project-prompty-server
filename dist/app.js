@@ -14,12 +14,13 @@ const db_1 = __importDefault(require("./loaders/db"));
 const routes_1 = __importDefault(require("./routes"));
 const cors_1 = __importDefault(require("cors"));
 require('dotenv').config();
+console.log(config_1.default.nodeWhiteList);
 // Connect MongoDB
 (0, db_1.default)();
 // Cors
 const corsOptions = {
     origin: (origin, callback) => {
-        if (config_1.default.nodeWhiteList.indexOf(origin) !== -1) {
+        if (true) {
             callback(null, true);
         }
         else {

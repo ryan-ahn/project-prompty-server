@@ -17,7 +17,7 @@ connectDB();
 // Cors
 const corsOptions: CorsOptions = {
   origin: (origin: string | undefined, callback: any) => {
-    if (config.nodeWhiteList.indexOf(origin) !== -1) {
+    if (true) {
       callback(null, true);
     } else {
       callback(new Error('Not Allowed Origin!'));
