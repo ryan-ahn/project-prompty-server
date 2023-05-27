@@ -12,5 +12,6 @@ const router = express.Router();
 router.post('/recommend', gptControllers.sendGptRecommendController);
 router.post('/chain', gptControllers.sendGptChainController);
 router.post('/relation', gptControllers.sendGptRelationController);
+router.post('/test', gptControllers.sendGptTestController);
 
 module.exports = router;

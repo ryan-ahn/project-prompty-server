@@ -32,4 +32,4 @@ const promptSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-module.exports = mongoose.model('prompt', promptSchema);
+module.exports = mongoose.model('share_prompt', promptSchema);

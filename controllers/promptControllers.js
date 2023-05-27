@@ -23,13 +23,8 @@ const createPromptController = async (req, res) => {
   } catch (error) {
     console.log(error);
     res
-      .status(statusCode.INTERNAL_SERVER_ERROR)
-      .json(
-        handler.fail(
-          statusCode.INTERNAL_SERVER_ERROR,
-          responseMessage.INTERNAL_SERVER_ERROR
-        )
-      );
+      .status(statusCode.BAD_REQUEST)
+      .json(handler.fail(statusCode.BAD_REQUEST, responseMessage.BAD_REQUEST));
   }
 };
 
@@ -37,20 +32,15 @@ const readPromptByIdController = async (req, res) => {
   const { id } = req.params;
   try {
     const data = await promptServices.readPromptByIdService(id);
-    res.status(statusCode.CREATED);
+    res.status(statusCode.OK);
     res.json(
       handler.success(statusCode.OK, responseMessage.READ_SUCCESS, data)
     );
   } catch (error) {
     console.log(error);
     res
-      .status(statusCode.INTERNAL_SERVER_ERROR)
-      .json(
-        handler.fail(
-          statusCode.INTERNAL_SERVER_ERROR,
-          responseMessage.INTERNAL_SERVER_ERROR
-        )
-      );
+      .status(statusCode.BAD_REQUEST)
+      .json(handler.fail(statusCode.BAD_REQUEST, responseMessage.BAD_REQUEST));
   }
 };
 

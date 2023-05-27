@@ -15,6 +15,7 @@ const sendGptChainController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
+    console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
@@ -34,6 +35,7 @@ const sendGptRelationController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
+    console.log(error);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
@@ -64,8 +66,28 @@ const sendGptRecommendController = async (req, res) => {
   }
 };
 
+const sendGptTestController = async (req, res) => {
+  try {
+    const data = await gptServices.sendGptTestService();
+    res
+      .status(statusCode.CREATED)
+      .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(
+        handler.fail(
+          statusCode.INTERNAL_SERVER_ERROR,
+          responseMessage.INTERNAL_SERVER_ERROR
+        )
+      );
+  }
+};
+
 module.exports = {
   sendGptChainController,
   sendGptRelationController,
   sendGptRecommendController,
+  sendGptTestController,
 };

@@ -29,7 +29,7 @@ const kakaoCallbackService = async (code) => {
     client_id: config.kakaoScriptKey,
     client_secret: '',
     grant_type: 'authorization_code',
-    redirect_uri: `${config.originHost}/login`,
+    redirect_uri: `${config.originHost}/signin`,
     code: code,
   };
   const params = new URLSearchParams(kakaoCallbackConfig).toString();
@@ -76,7 +76,7 @@ const kakaoCallbackService = async (code) => {
   if (userDetail) {
     resultData.userDetail = userDetail;
   } else {
-    resultData.userDetail = new userModel({
+    const userData = new userModel({
       userId: userResponse.data.id,
       name: userResponse.data.properties.nickname,
       email: userResponse.data.kakao_account.email,
@@ -90,6 +90,8 @@ const kakaoCallbackService = async (code) => {
       deleteAt: null,
       signinAt: null,
     });
+    resultData.userDetail = userData;
+    await userData.save();
   }
   // todo : delete user 에러처리 해야함
   return resultData;

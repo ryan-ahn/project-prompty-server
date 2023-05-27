@@ -7,35 +7,25 @@
 const promptModel = require('../models/promptSchema');
 
 const createPromptService = async (payload) => {
-  try {
-    const post = new promptModel({
-      promptList: payload.promptList,
-      category: payload.category,
-      createAt: new Date(),
-      modifyAt: new Date(),
-    });
-    await post.save();
-    const data = {
-      _id: post.id,
-    };
-    return data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+  const post = new promptModel({
+    promptList: payload.promptList,
+    category: payload.category,
+    createAt: new Date(),
+    modifyAt: new Date(),
+  });
+  await post.save();
+  const data = {
+    _id: post.id,
+  };
+  return data;
 };
 
 const readPromptByIdService = async (id) => {
-  try {
-    const prompt = await promptModel.findOne({ _id: id });
-    if (!prompt) {
-      return null;
-    }
-    return prompt;
-  } catch (error) {
-    console.log(error);
-    throw error;
+  const prompt = await promptModel.findOne({ _id: id });
+  if (!prompt) {
+    return null;
   }
+  return prompt;
 };
 
 module.exports = {
