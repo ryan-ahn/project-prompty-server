@@ -31,6 +31,9 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.2.0",
     "mongoose": "^7.0.3",
+    "openai": "^3.2.1",
+    "openai-streams": "^5.7.0",
+    "sse": "^0.0.8",
     "ts-node": "^10.9.1"
   }
 }

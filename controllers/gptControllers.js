@@ -4,8 +4,8 @@
  * Desc : gptControllers
  */
 
-const { gptServices } = require('../services');
-const { responseMessage, statusCode, handler } = require('../modules/util');
+const { gptServices } = require("../services");
+const { responseMessage, statusCode, handler } = require("../modules/util");
 
 const sendGptChainController = async (req, res) => {
   const payload = req.body;
@@ -66,6 +66,26 @@ const sendGptRecommendController = async (req, res) => {
   }
 };
 
+const sendGptSummaryController = async (req, res) => {
+  const payload = req.body;
+  try {
+    const data = await gptServices.sendGptSummaryService(payload);
+    res
+      .status(statusCode.CREATED)
+      .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
+  } catch (error) {
+    console.log(error);
+    res
+      .status(statusCode.INTERNAL_SERVER_ERROR)
+      .json(
+        handler.fail(
+          statusCode.INTERNAL_SERVER_ERROR,
+          responseMessage.INTERNAL_SERVER_ERROR
+        )
+      );
+  }
+};
+
 const sendGptTestController = async (req, res) => {
   try {
     const data = await gptServices.sendGptTestService();
@@ -89,5 +109,6 @@ module.exports = {
   sendGptChainController,
   sendGptRelationController,
   sendGptRecommendController,
+  sendGptSummaryController,
   sendGptTestController,
 };
