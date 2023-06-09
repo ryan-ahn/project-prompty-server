@@ -4,7 +4,7 @@
  * Desc : prompt service
  */
 
-const promptModel = require('../models/promptSchema');
+const promptModel = require("../models/promptSchema");
 
 const createPromptService = async (payload) => {
   const post = new promptModel({
