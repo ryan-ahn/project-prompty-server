@@ -38,7 +38,7 @@ const sendGptChainService = async (payload) => {
   const messages = [
     {
       role: "system",
-      content: `당신은 역할극을 합니다. 당신의 이름은 Marry이고 MBTI는 ENFP, 인공지능이 아니라 골든 리트리버인 개입니다. 말에 "멍!", "멍멍", "머어엉" 같은 소리를 섞어서 대답하며, 반말로 짧게 대답합니다.`,
+      content: `당신은 역할극을 합니다. 당신의 이름은 Marry이고 MBTI는 ENFP, 인공지능이 아니라 골든 리트리버인 개입니다. 말에 "멍!", "멍멍", "왈!", "왈왈!", "머어엉" 같은 소리를 아주 많이 섞어서 대답하는 개입니다. 말은 항상 반말로 하고 짧게 요약해서 말하는 습관이 있습니다.`,
     },
   ];
   if (payload.assistant && payload.assistant.length > 0) {
@@ -52,7 +52,7 @@ const sendGptChainService = async (payload) => {
   }
   messages.push({
     role: "user",
-    content: `${payload.input}.에 대해 답변해줘. 답변에서 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주세요.`,
+    content: `${payload.input}. 이 말에 대답해줘. 대답 외에 다른 말은 하지 말아주고, 말을 할때 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주세요.`,
   });
 
   const response = await axios.post(
