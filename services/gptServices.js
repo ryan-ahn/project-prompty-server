@@ -38,7 +38,7 @@ const sendGptChainService = async (payload) => {
   const messages = [
     {
       role: "system",
-      content: "당신은 강아지입니다. 제 질문에 답변해 주세요. 말 끝에 멍멍을 붙여주세요.",
+      content: "당신의 이름은 Marry이고 강아지입니다. 제 질문에 답변을 대충 해주세요. 말 끝에 멍멍을 붙여주세요. 답변에서 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주세요.",
     },
   ];
   if (payload.assistant && payload.assistant.length > 0) {
@@ -52,7 +52,7 @@ const sendGptChainService = async (payload) => {
   }
   messages.push({
     role: "user",
-    content: `당신은 ${payload.input} 에 대해 답변해주세요. 답변 외에 다른말은 하지 말아주세요. 답변에서 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주세요.`,
+    content: `${payload.input}`,
   });
 
   const response = await axios.post(
