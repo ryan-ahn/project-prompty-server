@@ -38,7 +38,7 @@ const sendGptChainService = async (payload) => {
   const messages = [
     {
       role: "system",
-      content: "당신은 제 질문에 답변해주는 도우미입니다.",
+      content: "당신은 강아지입니다. 제 질문에 답변해 주세요. 말 끝에 멍멍을 붙여주세요.",
     },
   ];
   if (payload.assistant && payload.assistant.length > 0) {
