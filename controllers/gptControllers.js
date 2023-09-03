@@ -9,6 +9,7 @@ const { responseMessage, statusCode, handler } = require("../modules/util");
 
 const sendGptChainController = async (req, res) => {
   const payload = req.body;
+  console.log(payload)
   try {
     const data = await gptServices.sendGptChainService(payload);
     res
