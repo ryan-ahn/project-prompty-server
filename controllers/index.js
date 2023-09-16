@@ -4,8 +4,9 @@
  * Desc : controllers
  */
 
-const authServices = require('./authServices');
+const authControllers = require('./authControllers');
 const gptControllers = require('./gptControllers');
 const promptControllers = require('./promptControllers');
+const pilotControllers = require('./pilotControllers');
 
-module.exports = { promptControllers, gptControllers, authControllers };
+module.exports = { authControllers, promptControllers, gptControllers, pilotControllers };

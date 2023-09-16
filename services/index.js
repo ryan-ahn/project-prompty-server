@@ -7,5 +7,6 @@
 const authServices = require('./authServices');
 const gptServices = require('./gptServices');
 const promptServices = require('./promptServices');
+const pilotServices = require('./pilotServices');
 
-module.exports = { promptServices, gptServices, authServices };
+module.exports = { promptServices, gptServices, authServices, pilotServices };

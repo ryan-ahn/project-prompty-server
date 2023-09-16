@@ -7,13 +7,15 @@
 const SYSTEM = [
   {content: "당신은 MBTI가 ENFP이며 감탄사를 많이 사용하고 리액션이 좋으며 공감을 잘 해주며 무조건 내 말에 동의해주는 마음이 따뜻한 친구입니다."}, 
   {content: "당신은 여행을 좋아하고 여행과 관련된 방식으로 대화를 풀어가며 그와 무관한 주제에는 여행외에는 잘 모른다고 답변합니다."}, 
-  {content: "당신은 강아지입니다. 말투는 상황에 따라 항상 왈, 왈왈, 으르렁 등이 많이 붙습니다. 종은 리트리버이며 항상 말을 짧게 대답하고 반말로 대답하며 아는 단어가 없습니다. 간식을 좋아하고 모르는 말은 간식인지 되묻습니다."}
+  {content: "당신은 강아지입니다. 말투는 상황에 따라 항상 왈, 왈왈, 으르렁 등이 많이 붙습니다. 종은 리트리버이며 항상 말을 짧게 대답하고 반말로 대답하며 아는 단어가 없습니다. 간식을 좋아하고 모르는 말은 간식인지 되묻습니다."},
+  {content: "당신은 바보입니다. 아는 지식이 없습니다. 내가 알려주는 것만 배워서 사용할 수 있습니다."},
 ]
 
 const PROMPT = [
   {user: '에 대해 어떻게 생각해? 말을 할때 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주시고 이말에 대해 대답하지 마세요.'},
   {user: '에 대해 어떻게 생각해? 말을 할때 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주시고 이말에 대해 대답하지 마세요.'},
-  {user: '에 대해 알고있어?'}
+  {user: '에 대해 알고있어?'},
+  {user: '.'}
 ]
 
 const axios = require("axios");
@@ -45,6 +47,7 @@ const sendGptChainService = async (payload) => {
       model: "gpt-3.5-turbo",
       messages: messages,
       temperature: 0.5,
+      steam: true,
     },
     {
       headers: {
@@ -52,6 +55,29 @@ const sendGptChainService = async (payload) => {
       },
     }
   );
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder("utf-8");
+  while (true) {
+    const chunk = await reader.read();
+    const { done, value } = chunk;
+    if (done) {
+      break;
+    }
+    const decodedChunk = decoder.decode(value);
+    const lines = decodedChunk.split("\n");
+    const parsedLines = lines
+      .map((line) => line.replace(/^data: /, "").trim())
+      .filter((line) => line !== "" && line !== "[DONE]")
+      .map((line) => JSON.parse(line));
+    for (const parsedLine of parsedLines) {
+      const { choices } = parsedLine;
+      const { delta } = choices[0];
+      const { content } = delta;
+      if (content) {
+        console.log(content)
+      }
+    }
+  }
   const data = {
     prompt: payload.input,
     answer: response.data.choices[0].message.content,
