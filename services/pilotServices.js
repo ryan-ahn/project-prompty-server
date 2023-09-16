@@ -39,7 +39,7 @@ const sendChatCompletionsService = async (
     },
     {
       headers: {
-        Authorization: `Bearer ${config.gptSecretKey}`,
+        Authorization: `Bearer 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`,
       },
     },
   );

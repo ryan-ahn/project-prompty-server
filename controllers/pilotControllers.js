@@ -14,7 +14,7 @@ const sendChatCompletionsController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
