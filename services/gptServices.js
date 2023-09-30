@@ -13,7 +13,6 @@ const SYSTEM = [
 
 const PROMPT = [
   {user: '에 대해 어떻게 생각해? 말을 할때 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주시고 이말에 대해 대답하지 마세요.'},
-  {user: '에 대해 어떻게 생각해? 말을 할때 중요한 단어나 생소한 단어들이 있는 경우에는 해당 단어들을 각각 <em></em>태그 안에 넣어주시고 이말에 대해 대답하지 마세요.'},
   {user: '에 대해 알고있어?'},
   {user: '.'}
 ]
@@ -54,29 +53,29 @@ const sendGptChainService = async (payload) => {
       },
     }
   );
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder("utf-8");
-  while (true) {
-    const chunk = await reader.read();
-    const { done, value } = chunk;
-    if (done) {
-      break;
-    }
-    const decodedChunk = decoder.decode(value);
-    const lines = decodedChunk.split("\n");
-    const parsedLines = lines
-      .map((line) => line.replace(/^data: /, "").trim())
-      .filter((line) => line !== "" && line !== "[DONE]")
-      .map((line) => JSON.parse(line));
-    for (const parsedLine of parsedLines) {
-      const { choices } = parsedLine;
-      const { delta } = choices[0];
-      const { content } = delta;
-      if (content) {
-        console.log(content)
-      }
-    }
-  }
+  // const reader = response.body.getReader();
+  // const decoder = new TextDecoder("utf-8");
+  // while (true) {
+  //   const chunk = await reader.read();
+  //   const { done, value } = chunk;
+  //   if (done) {
+  //     break;
+  //   }
+  //   const decodedChunk = decoder.decode(value);
+  //   const lines = decodedChunk.split("\n");
+  //   const parsedLines = lines
+  //     .map((line) => line.replace(/^data: /, "").trim())
+  //     .filter((line) => line !== "" && line !== "[DONE]")
+  //     .map((line) => JSON.parse(line));
+  //   for (const parsedLine of parsedLines) {
+  //     const { choices } = parsedLine;
+  //     const { delta } = choices[0];
+  //     const { content } = delta;
+  //     if (content) {
+  //       console.log(content)
+  //     }
+  //   }
+  // }
   const data = {
     prompt: payload.input,
     answer: response.data.choices[0].message.content,
