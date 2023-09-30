@@ -47,7 +47,6 @@ const sendGptChainService = async (payload) => {
       model: "gpt-3.5-turbo",
       messages: messages,
       temperature: 0.5,
-      steam: true,
     },
     {
       headers: {
