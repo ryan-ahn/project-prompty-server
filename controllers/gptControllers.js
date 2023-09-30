@@ -9,14 +9,13 @@ const { responseMessage, statusCode, handler } = require("../modules/util");
 
 const sendGptChainController = async (req, res) => {
   const payload = req.body;
-  console.log(payload)
   try {
     const data = await gptServices.sendGptChainService(payload);
     res
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
+    console.log(error.data);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
@@ -36,7 +35,7 @@ const sendGptRelationController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
+    console.log(error.data);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
@@ -56,6 +55,7 @@ const sendGptRecommendController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(util.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
+    console.log(error.data);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
@@ -75,7 +75,7 @@ const sendGptSummaryController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
+    console.log(error.data);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
@@ -94,7 +94,7 @@ const sendGptTestController = async (req, res) => {
       .status(statusCode.CREATED)
       .json(handler.success(statusCode.CREATED, responseMessage.SUCCESS, data));
   } catch (error) {
-    console.log(error);
+    console.log(error.data);
     res
       .status(statusCode.INTERNAL_SERVER_ERROR)
       .json(
